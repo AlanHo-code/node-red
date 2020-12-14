@@ -1,0 +1,102 @@
+[
+    {
+        "id": "12076993.43a536",
+        "type": "tab",
+        "label": "流程4",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "99550247.97444",
+        "type": "http in",
+        "z": "12076993.43a536",
+        "name": "",
+        "url": "/pin4",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "10622c6.3b4ecd4"
+            ]
+        ]
+    },
+    {
+        "id": "fb73916a.d4615",
+        "type": "rpi-gpio in",
+        "z": "12076993.43a536",
+        "name": "GPIO4",
+        "pin": "7",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "fb17fef2.b96c5"
+            ]
+        ]
+    },
+    {
+        "id": "10622c6.3b4ecd4",
+        "type": "function",
+        "z": "12076993.43a536",
+        "name": "Get GPIO",
+        "func": "msg.payload = global.get(\"GPIO\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "e44206c4.26d358",
+                "c4b2bf89.acc63"
+            ]
+        ]
+    },
+    {
+        "id": "e44206c4.26d358",
+        "type": "http response",
+        "z": "12076993.43a536",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c4b2bf89.acc63",
+        "type": "debug",
+        "z": "12076993.43a536",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fb17fef2.b96c5",
+        "type": "function",
+        "z": "12076993.43a536",
+        "name": "Set GPIO",
+        "func": "global.set(\"GPIO\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 300,
+        "wires": [
+            [
+                "c4b2bf89.acc63"
+            ]
+        ]
+    }
+]
